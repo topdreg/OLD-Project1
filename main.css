@@ -4,8 +4,7 @@
         min-width: 550px;
 }
 
-@font-face
-{
+@font-face{
 font-family: harryP;
 src: url(HARRYP__.TTF);
 }
@@ -23,7 +22,7 @@ header{
         background-position: center;    
 }
 
-header p{
+header a{
         font-family: harryP;
         display: block;
         float: right;   
@@ -36,9 +35,16 @@ header p{
 }
 
 .main{  
+        box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+        -o-box-sizing:border-box;
         border: black 1px solid;
         background: url(../images/opacity.png) repeat;
         overflow: hidden;
+        width: 100%;
+        margin-top: 0;
+        padding-top: 0;
 }
 
 h3{
@@ -49,15 +55,36 @@ h3{
         display: block; 
 }
 
- /****************************************/
- /**************LOGIN PAGE****************/
- /****************************************/
+ /***********************************************/
+ /**************INDEX/LOGIN PAGE****************/
+ /**********************************************/
 
 #login{
+        display: block;
+        margin: 0 auto;
         width: 300px;
+        text-align: right;
+}
+#login p{
+        display: inline-block;
+        margin: 0;
+        font-size: 14px;
+}
+#login a{
+        font-size: 14px;
+        display:inline-block;
+        margin: 0;
+}
+#login a:hover{
+        text-decoration: underline;     
+}
+
+#createProfile,
+#loginForm{
+        width: 250px;
         margin: 20px auto;
-        padding: 25px;
-        padding-bottom: 50px;
+        padding: 0 25px 50px;
+        clear: both;
 }
 
 input{
@@ -69,9 +96,85 @@ img#imgPrev{
         display: block;
         margin: 0 auto;
 }
-input#submit{
+input#submit, input.login{
         float: right;
         margin-top: 10px;       
+}
+
+label#note{
+        margin-bottom: 10px;
+        display: block;
+        font-size: 10px;
+        color: #634112;
+}
+ /****************************************/
+ /**************PROFILE PAGE**************/
+ /****************************************/
+#delete, #viewProf{
+           background:none;
+     border:none; 
+     padding:0;
+     float: right;
+     cursor: pointer;
+     color: #634112;
+     margin-top: 20px;
+     margin-right: 15px;
+     font-weight: bold;
+     font-family:"Times New Roman", Times, serif;
+     font-size: 16px;
+}
+#delete:hover, 
+#viewProf:hover,
+#continue:hover{
+          text-decoration: underline;
+}
+
+.logout{
+        margin: 20px 25px 0 0;
+        clear: none;
+}
+.logout:hover{
+        text-decoration: underline;
+}
+#edit{
+        float: right;
+        margin-right: 150px;
+        margin-bottom: 25px;
+}
+#continue{
+           background:none;
+     border:none; 
+     padding:0;
+     cursor: pointer;
+     color: #634112;
+     font-weight: bold;
+     font-family:"Times New Roman", Times, serif;
+     font-size: 16px;    
+     margin-left: 25px;
+}
+
+#editForm{
+        width: 250px;
+        margin: 0 auto;
+}
+
+#editForm input,
+#editForm h5{
+        display: inline-block;
+} 
+
+#editForm #saveEdit{
+        float: right;
+        margin-bottom: 50px;
+}
+
+#sorted{
+        float: right;
+        margin: 10px 10px 10px 0;
+        clear:both;
+}
+#sorted:hover{
+        text-decoration: underline;
 }
 
  /****************************************/
@@ -84,7 +187,8 @@ input#submit{
 } 
  
 #next{
-        float: right;   
+        display: block;
+        margin: 0 auto;
 } 
 #status{
         display: block;
@@ -102,9 +206,18 @@ input#submit{
         display: inline-block;  
 }
 
-input#results{
+input#results, 
+input#saveSubmit,
+input#hiddenSubmit{
         display: none;
 }
+
+#save{
+        float: right;
+        margin: 0 50px 25px 0;
+
+}
+
 
  /****************************************/
  /**************RESULTS PAGE**************/
@@ -112,9 +225,19 @@ input#results{
 img#house_crest{
         display: block;
         margin: 20px auto;
+        clear: both;
 }
 
 h4{
+        display: block;
+        text-align: center;
+        margin: 30px auto;
+        font-family: harryP;
+        font-size: 40px; 
+        font-weight: bolder;
+}
+
+h5{
         display: block;
         text-align: center;
         margin: 20px auto;
@@ -122,8 +245,15 @@ h4{
         font-size: 30px; 
         font-weight: bolder;
 }
+
  p#results{
                 display: block;
+                display: block;
+                text-align: center;
+                margin: 10px auto;
+                font-family: harryP;
+                font-size: 20px; 
+                font-weight: bolder;
  }
 
 a{
@@ -134,22 +264,27 @@ a{
         font-weight: bold;
 }
 
+
+
  /****************************************/
  /**************HOUSES PAGE***************/
  /****************************************/
 .houseCol{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+        -o-box-sizing:border-box;
         float: left;
-        width: 19.9%;
+        width: 20%;
         padding-bottom: 100%;
         margin-bottom:-100%;
-}
-
-#gryffindor, #slytherin, #ravenclaw, #hufflepuff{
         border-right: 1px dashed #634112;
 }
-#gryffindor{
-        margin-left: 4px;
+
+#muggle{
+        border: none;
 }
+
 
 .houseCol img{
         margin: 20px auto;
@@ -163,11 +298,12 @@ a{
 }
 
 .houseCol .userImg{
-        width: 15%;
+        width: 20%;
         height: auto;
         display: inline-block;
         float: left;
         margin-left: 5%;
+        margin: 0 auto;
 }
 
 .houseCol .nameDiv{
@@ -178,4 +314,19 @@ a{
 .houseCol .userName{
         font-weight: bold;
         color: #634112;
+        margin: 0 auto;
+}
+
+.houseCol #flag{
+        background-color: transparent;
+        text-decoration: none;
+        border: none;
+        font-size: 8px;
+        float: right;
+        color: #634112;
+        cursor: pointer;
+}
+
+.houseCol #flag:hover{
+        text-decoration: underline;
 }
