@@ -3,6 +3,16 @@
 <?php
         //error_reporting(E_ALL);
         //ini_set('display_errors', '1');
+
+if(isset($_POST['flag'])){
+  echo ('<script>alert("Your flag has been reported to our administrators, thank you for your contribution.");</script>');
+
+  $name = $_POST['name'];
+    $from = "VirtualSortingHat"; 
+    $subject = "Profile Flagged";
+    $message = "A user has flagged " . $name . "'s profile as inappropriate.";
+    mail("intergalacticoverlords422@gmail.com",$subject,$message,"From: $from\n");
+}
         
         include('appData.txt');
         
@@ -23,7 +33,7 @@
 
   <body>
     <header>
-      <p>Virtual Sorting Hat<p> 
+      <a href="index.php">Virtual Sorting Hat</a> 
     </header>
     <div class="main houses">
       <div id="gryffindor" class="houseCol">
@@ -45,6 +55,7 @@
                 echo ("<div class ='user'>");
                  echo ("<img class='userImg' src='". $row['link']."'>");          
                  echo ("<div class = 'nameDiv'><p class= 'userName'>".$row['firstName']." ".$row['lastName']."</p></div>");
+                 echo('<form action="houses.php" method="post" id="report"><input type="hidden" id="name" name="name" value="'.$row['firstName']." ".$row['lastName'].'"><input type="submit" value="Flag Profile as Inappropriate" id="flag" name="flag"></form>');
                  echo ('</div>');
                }
            }
@@ -70,6 +81,7 @@
                 echo ("<div class ='user'>");
                  echo ("<img class='userImg' src='". $row['link']."'>");           
                  echo ("<div class = 'nameDiv'><p class= 'userName'>".$row['firstName']." ".$row['lastName']."</p></div>");
+                 echo('<form action="houses.php" method="post" id="report"><input type="hidden" id="name" name="name" value="'.$row['firstName']." ".$row['lastName'].'"><input type="submit" value="Flag Profile as Inappropriate" id="flag" name="flag"></form>');
                  echo ('</div>');
                }
            }
@@ -95,6 +107,7 @@
                 echo ("<div class ='user'>");
                  echo ("<img class='userImg' src='". $row['link']."'>");          
                  echo ("<div class = 'nameDiv'><p class= 'userName'>".$row['firstName']." ".$row['lastName']."</p></div>");
+                 echo('<form action="houses.php" method="post" id="report"><input type="hidden" id="name" name="name" value="'.$row['firstName']." ".$row['lastName'].'"><input type="submit" value="Flag Profile as Inappropriate" id="flag" name="flag"></form>');
                  echo ('</div>');
                }
            }
@@ -120,6 +133,7 @@
                 echo ("<div class ='user'>");
                  echo ("<img class='userImg' src='". $row['link']."'>");           
                  echo ("<div class = 'nameDiv'><p class= 'userName'>".$row['firstName']." ".$row['lastName']."</p></div>");
+                 echo('<form action="houses.php" method="post" id="report"><input type="hidden" id="name" name="name" value="'.$row['firstName']." ".$row['lastName'].'"><input type="submit" value="Flag Profile as Inappropriate" id="flag" name="flag"></form>');
                  echo ('</div>');
                }
            }
@@ -145,6 +159,7 @@
                 echo ("<div class ='user'>");
                 echo ("<img class='userImg' src='". $row['link']."'>");           
                 echo ("<div class = 'nameDiv'><p class= 'userName'>".$row['firstName']." ".$row['lastName']."</p></div>");
+                echo('<form action="houses.php" method="post" id="report"><input type="hidden" id="name" name="name" value="'.$row['firstName']." ".$row['lastName'].'"><input type="submit" value="Flag Profile as Inappropriate" id="flag" name="flag"></form>');
                 echo ('</div>');
                }
            }
