@@ -6,7 +6,7 @@ if(isset($_POST['results'])){
         //ini_set('display_errors', '1');
         
         include('appData.txt');
-        
+
         try 
         { 
          $dbh = new PDO('mysql:host='.$server.';port='.$port.';dbname='.$dbname, $user, $pass);
@@ -16,13 +16,32 @@ if(isset($_POST['results'])){
         } 
         $fname = $_POST["fname"];
         $lname = $_POST["lname"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
         $profPic = $_POST["profPic"];
         $gryff = $_POST["gryff"];
         $slyth = $_POST["slyth"];
         $rave = $_POST["rave"];
         $huff = $_POST["huff"];
         $mugg = $_POST["mugg"];
+        $count = NULL;
 
+        $query= "SELECT DISTINCT p.username AS username
+                                         FROM player p
+                                         WHERE p.username = ?";
+        $stmt= $dbh->prepare($query);
+        $stmt->bindParam(1, $username);
+
+        if($stmt->execute()){
+                if($row = $stmt->fetch()){
+                        $query = "DELETE FROM player
+                                        WHERE username = ?";
+
+                        $stmt = $dbh->prepare($query);
+                        $stmt->bindParam(1, $username); 
+                        $stmt->execute();
+                }
+        }
 
         $max = max($gryff, $slyth, $rave, $huff, $mugg);
 
@@ -52,7 +71,7 @@ if(isset($_POST['results'])){
                 $img = "images/muggle.png";
         }
         
-        $query = "INSERT INTO player VALUES(?,?,?,?,?,?,?,?,?)";
+        $query = "INSERT INTO player VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = $dbh->prepare($query);
 
@@ -65,9 +84,13 @@ if(isset($_POST['results'])){
         $stmt->bindParam(7, $huff);
         $stmt->bindParam(8, $mugg);
         $stmt->bindParam(9, $housePHP);
+        $stmt->bindParam(10, $username);
+        $stmt->bindParam(11, $password);
+        $stmt->bindParam(12, $count);
 
         $stmt->execute();
 
+ $dbh = null;
 }
 else{
         header('Location: index.php');
@@ -82,14 +105,20 @@ else{
 
         <body>
                 <header>
-                        <p>Virtual Sorting Hat<p>       
+                        <a href="index.php">Virtual Sorting Hat</a>     
                 </header>
                 <div class="main">
+                        <a href="login.php" class="logout">Log Out</a>
+                        <form method="post" action="profile.php">
+                    <?php echo '<input type="hidden" id="username" name="username" value="' . $username . '">' ?>
+                    <?php echo '<input type="hidden" id="password" name="password" value="' . $password . '">' ?>
+                                <input type="submit" value="View Profile" name="viewProf" id="viewProf">
+                        </form>
                          <?php echo "<img id='house_crest' src=" . $img . ">" ?>
 
                         <?php echo "<h4 id ='house'>Welcome to " . $house . "!</h4>" ?>
-
-                        <?php echo "<p id='results'>You got " . $gryff . " points for Gryffindor, ". $slyth . " points for Slytherin, " . $rave . " points for Ravenclaw, " . $huff . " points for Hufflepuff and " . $mugg . " points for Muggle!" ?>
+                        <h5>Your scores were:</h5>
+                        <?php echo "<p id='results'>". $gryff . " points for Gryffindor <br/>". $slyth . " points for Slytherin <br/>" . $rave . " points for Ravenclaw <br/>" . $huff . " points for Hufflepuff <br/> " . $mugg . " points for Muggle<br/>" ?>
 
                         <a href="houses.php">See who else got sorted &#62;</a>
                 </div>
